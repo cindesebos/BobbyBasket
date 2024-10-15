@@ -9,12 +9,13 @@ namespace Sources.Gameplay.ItemsBuilder
 {
     public class ItemsPool : MonoBehaviour
     {
-        [SerializeField] private ItemsSpawnerData _data;
-        [SerializeField] private SpawnerFactory _spawnerFactory;
+        [SerializeField] private int _numberOfEachItems;
 
-        [SerializeField] private List<Item> _items = new List<Item>();
+        private ItemsSpawnerData _data;
+        private SpawnerFactory _spawnerFactory;
 
-        [SerializeField] private Item[] _itemPrefabs;
+        private List<Item> _items = new List<Item>();
+        private Item[] _itemPrefabs;
 
         [Inject]
         private void Construct(ItemsSpawnerData data, SpawnerFactory spawnerFactory)
@@ -23,7 +24,15 @@ namespace Sources.Gameplay.ItemsBuilder
             _spawnerFactory = spawnerFactory;
         }
 
-        private void Start() => Init();
+        private void Start()
+        {
+            Init();
+
+            foreach (Item prefab in _itemPrefabs)
+            {
+                for (int i = 0; i < _numberOfEachItems; i++) CreateItem(prefab, transform.position);
+            }
+        }
 
         private void Init()
         {
@@ -31,25 +40,25 @@ namespace Sources.Gameplay.ItemsBuilder
 
             _itemPrefabs = new Item[convertedItems.Length];
 
-            for(int i=0; i<_itemPrefabs.Length; i++) _itemPrefabs[i] = convertedItems[i];
+            for (int i = 0; i < _itemPrefabs.Length; i++) _itemPrefabs[i] = convertedItems[i];
         }
 
-        private Item CreateItem(Vector2 position)
+        private Item CreateItem(Item prefab, Vector2 position, bool isHideItem = false)
         {
-            Item prefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Length)];
-
             Item spawnedItem = _spawnerFactory.SpawnItem(prefab, position, transform);
+
+            spawnedItem.gameObject.SetActive(isHideItem);
 
             _items.Add(spawnedItem);
 
             return spawnedItem;
         }
 
-        public Item GetFreeItem(Vector2 position)
+        public Item GetFreeItemByType(Item prefab, Vector2 position)
         {
             foreach (Item item in _items)
             {
-                if (!item.gameObject.activeInHierarchy)
+                if (prefab.GetType() == item.GetType() && !item.gameObject.activeInHierarchy)
                 {
                     item.gameObject.SetActive(true);
                     item.transform.position = position;
@@ -57,7 +66,12 @@ namespace Sources.Gameplay.ItemsBuilder
                 }
             }
 
-            return CreateItem(position);
+            return CreateItem(prefab, position, true);
+        }
+
+        public void HideAllItems()
+        {
+            foreach (Item prefab in _items) prefab.gameObject.SetActive(false);
         }
     }
 }

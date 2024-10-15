@@ -1,5 +1,8 @@
 using Zenject;
 using UnityEngine;
+using Sources.Gameplay.Items;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Sources.Gameplay.ItemsBuilder
 {
@@ -10,6 +13,7 @@ namespace Sources.Gameplay.ItemsBuilder
 
         private readonly float _maxSpawnCooldown;
         private readonly Transform[] _spawnPoints;
+        private readonly List<Item> _itemPrefabs = new List<Item>();
 
         private float _spawnCooldown;
 
@@ -20,6 +24,7 @@ namespace Sources.Gameplay.ItemsBuilder
             _itemsPool = itemsPool;
             _spawnPoints = spawnPoints;
 
+            foreach(Item item in _data.Items) _itemPrefabs.Add(item);
             _maxSpawnCooldown = _data.SpawnCooldown;
             _spawnCooldown = _maxSpawnCooldown;
         }
@@ -41,9 +46,11 @@ namespace Sources.Gameplay.ItemsBuilder
 
         private void SpawnItem()
         {
+            Item prefab = _itemPrefabs[Random.Range(0, _itemPrefabs.Count)];
+
             Vector2 spawnPosition = new Vector2(Random.Range(GetSpawnpointPositionXByIndex(0), GetSpawnpointPositionXByIndex(1)), GetSpawnpointPositioYXByIndex(0));
 
-            _itemsPool.GetFreeItem(spawnPosition);
+            _itemsPool.GetFreeItemByType(prefab, spawnPosition);
         }
 
         private float GetSpawnpointPositionXByIndex(int index) => _spawnPoints[index].transform.position.x;

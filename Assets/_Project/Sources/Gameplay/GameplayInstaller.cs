@@ -12,6 +12,9 @@ namespace Sources.Gameplay
         [SerializeField] private ItemsPool _itemsPool;
         [Space]
 
+        [SerializeField] private GameOverPopUp _gameOverPopUp;
+        [Space]
+
         [SerializeField] private CoinCounter _coinCounter;
 
         [SerializeField] private ItemsSpawnerData _data;
@@ -20,11 +23,13 @@ namespace Sources.Gameplay
         public override void InstallBindings()
         {
             BindCharacterInput();
-            BindItemsSpawner();
             BindSpawnerFactory();
             BindItemsPool();
+            BindItemsSpawner();
             BindCoinCounter();
             BindCoinsHandler();
+            BindGameplayStateObserver();
+            BindGameOverPopUp();
         }
 
         private void BindCharacterInput()
@@ -70,6 +75,19 @@ namespace Sources.Gameplay
         private void BindCoinsHandler()
         {
             Container.BindInterfacesAndSelfTo<CoinsHandler>()
+                .AsSingle();
+        }
+
+        private void BindGameplayStateObserver()
+        {
+            Container.BindInterfacesAndSelfTo<GameplayStateObserver>()
+                .AsSingle();   
+        }
+
+        private void BindGameOverPopUp()
+        {
+            Container.Bind<GameOverPopUp>()
+                .FromInstance(_gameOverPopUp)
                 .AsSingle();
         }
     }

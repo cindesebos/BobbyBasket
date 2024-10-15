@@ -8,15 +8,15 @@ namespace Sources.UI
     {
         [SerializeField] private TextMeshProUGUI _text;
 
-        private int _score;
+        public int Score { get; private set;}
 
         public void AddCoins(int score)
         {
             if(score < 0) throw new ArgumentOutOfRangeException();
 
-            _score += score;
+            Score += score;
 
-            _text.text = _score.ToString();
+            _text.text = Score.ToString();
         }
     }
 }
