@@ -3794,6 +3794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 3268682265819115155, guid: 1ae210808aec69b4f8891df1ce5efa27, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3851007234913971834, guid: 1ae210808aec69b4f8891df1ce5efa27, type: 3}
       propertyPath: m_Size.x
       value: 0.9420894
@@ -3812,7 +3816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3851007234913971834, guid: 1ae210808aec69b4f8891df1ce5efa27, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6163202519651405357, guid: 1ae210808aec69b4f8891df1ce5efa27, type: 3}
       propertyPath: m_LocalPosition.x

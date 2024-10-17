@@ -11,17 +11,12 @@ namespace Sources.Gameplay.Items
         [SerializeField] private int _amount;
 
         [Inject]
-        protected void Construct(ItemsSFX itemsSFX, CoinsHandler coinsHandler)
+        private void Construct(ItemsSFX itemsSFX, CoinsHandler coinsHandler)
         {
             base.Construct(itemsSFX);
             _coinsHandler = coinsHandler;
         }
 
-        public override void PickUp()
-        {
-            _coinsHandler.OnPickedUpCoin(_amount);
-
-            Debug.Log($"Character picked up {_amount} coins");
-        }
+        public override void PickUp() => _coinsHandler.OnPickedUpCoin(_amount);
     }
 }

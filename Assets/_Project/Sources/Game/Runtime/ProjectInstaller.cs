@@ -1,6 +1,8 @@
 using UnityEngine;
 using Zenject;
 using Sources.Services;
+using Sources.Services.SaveLoad;
+using Sources.Services.Score;
 
 namespace Sources.Game.Runtime
 {
@@ -10,6 +12,14 @@ namespace Sources.Game.Runtime
 
         public override void InstallBindings()
         {
+            Container.Bind<ISaveLoadService>()
+                .To<PlayerPrefsSaveLoadService>()
+                .AsSingle();
+
+            Container.Bind<IScoreService>()
+                .To<ScoreService>()
+                .AsSingle();
+
             Container.Bind<CurtainView>()
                 .FromInstance(_curtainView)
                 .AsSingle();

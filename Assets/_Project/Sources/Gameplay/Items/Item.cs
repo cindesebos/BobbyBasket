@@ -17,7 +17,6 @@ namespace Sources.Gameplay.Items
 
         public void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log(other.gameObject.name);
             if (other.gameObject.GetComponent<Character.Character>())
             {
                 PickUp();

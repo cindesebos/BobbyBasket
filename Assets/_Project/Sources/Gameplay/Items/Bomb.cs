@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using Sources.Gameplay;
 
 namespace Sources.Gameplay.Items
 {
@@ -11,17 +10,12 @@ namespace Sources.Gameplay.Items
         [SerializeField] private int _amount;
 
         [Inject]
-        protected void Construct(ItemsSFX itemsSFX, GameplayStateObserver gameplayStateObserver)
+        private void Construct(ItemsSFX itemsSFX, GameplayStateObserver gameplayStateObserver)
         {
             base.Construct(itemsSFX);
             _gameplayStateObserver = gameplayStateObserver;
         }
 
-        public override void PickUp()
-        {
-            Debug.Log($"Character picked up a bomb");
-
-            _gameplayStateObserver.OnGameOver();
-        }
+        public override void PickUp() => _gameplayStateObserver.OnGameOver();
     }
 }

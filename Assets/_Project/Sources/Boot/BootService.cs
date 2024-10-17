@@ -1,7 +1,7 @@
-using UnityEngine;
-using Cysharp.Threading.Tasks;
 using Zenject;
 using Sources.Services;
+using Sources.Services.Score;
+using UnityEngine;
 
 namespace Sources.Boot
 {
@@ -10,14 +10,19 @@ namespace Sources.Boot
         private const Scenes SceneToLoad = Scenes.MainMenu;
 
         private readonly SceneLoader _sceneLoader;
+        private readonly IScoreService _scoreService;
 
-        public BootService(SceneLoader sceneLoader)
+        [Inject]
+        public BootService(SceneLoader sceneLoader, IScoreService scoreService)
         {
             _sceneLoader = sceneLoader;
+            _scoreService = scoreService;
         }
 
         public async void Initialize()
         {
+            _scoreService.Load();
+
             await _sceneLoader.LoadScene(SceneToLoad);
         }
     }

@@ -15,6 +15,7 @@ namespace Sources.Gameplay.ItemsBuilder
         private readonly Transform[] _spawnPoints;
         private readonly List<Item> _itemPrefabs = new List<Item>();
 
+        private bool _isWorking;
         private float _spawnCooldown;
 
         [Inject]
@@ -29,7 +30,6 @@ namespace Sources.Gameplay.ItemsBuilder
             _spawnCooldown = _maxSpawnCooldown;
         }
 
-        private bool _isWorking;
 
         public void Tick()
         {
