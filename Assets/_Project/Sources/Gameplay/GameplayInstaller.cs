@@ -4,6 +4,7 @@ using Sources.Gameplay.ItemsBuilder;
 using Sources.Gameplay.ItemsBuilder.Factory;
 using Sources.UI;
 using Sources.Gameplay.Common;
+using Sources.Gameplay.Items;
 
 namespace Sources.Gameplay
 {
@@ -19,6 +20,10 @@ namespace Sources.Gameplay
 
         [SerializeField] private ItemsSpawnerData _data;
         [SerializeField] private Transform[] _spawnPoints;
+        [Space]
+
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private ItemsSFXData _itemsSFXData;
 
         public override void InstallBindings()
         {
@@ -30,6 +35,7 @@ namespace Sources.Gameplay
             BindCoinsHandler();
             BindGameplayStateObserver();
             BindGameOverPopUp();
+            BindItemsSFX();
         }
 
         private void BindCharacterInput()
@@ -89,6 +95,20 @@ namespace Sources.Gameplay
             Container.Bind<GameOverPopUp>()
                 .FromInstance(_gameOverPopUp)
                 .AsSingle();
+        }
+
+        private void BindItemsSFX()
+        {
+            Container.Bind<AudioSource>()
+                .FromInstance(_audioSource)
+                .AsSingle();
+
+            Container.Bind<ItemsSFXData>()
+                .FromInstance(_itemsSFXData)
+                .AsSingle();
+
+            Container.BindInterfacesAndSelfTo<ItemsSFX>()
+                .AsSingle();  
         }
     }
 }

@@ -11,8 +11,9 @@ namespace Sources.Gameplay.Items
         [SerializeField] private int _amount;
 
         [Inject]
-        private void Construct(GameplayStateObserver gameplayStateObserver)
+        protected void Construct(ItemsSFX itemsSFX, GameplayStateObserver gameplayStateObserver)
         {
+            base.Construct(itemsSFX);
             _gameplayStateObserver = gameplayStateObserver;
         }
 

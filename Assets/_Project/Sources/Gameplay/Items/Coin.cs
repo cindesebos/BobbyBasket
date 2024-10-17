@@ -11,8 +11,9 @@ namespace Sources.Gameplay.Items
         [SerializeField] private int _amount;
 
         [Inject]
-        private void Construct(CoinsHandler coinsHandler)
+        protected void Construct(ItemsSFX itemsSFX, CoinsHandler coinsHandler)
         {
+            base.Construct(itemsSFX);
             _coinsHandler = coinsHandler;
         }
 

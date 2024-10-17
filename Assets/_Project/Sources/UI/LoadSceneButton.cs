@@ -12,9 +12,9 @@ namespace Sources.UI
 
         [Inject]
         private void Construct(SceneLoader sceneLoader) =>
-            GetComponent<Button>().onClick.AddListener(() =>
+            GetComponent<Button>().onClick.AddListener(async () =>
             {   
-                sceneLoader.LoadScene(_sceneToLoad);
+                await sceneLoader.LoadScene(_sceneToLoad);
             });
     }
 }
