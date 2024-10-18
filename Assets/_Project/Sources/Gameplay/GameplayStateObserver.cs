@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 using Sources.UI;
 using Sources.Gameplay.ItemsBuilder;

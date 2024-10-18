@@ -1,9 +1,14 @@
+using UnityEngine;
+
 namespace Sources.Services.Score
 {
     [System.Serializable]
     public class ScoreData
     {
-        public int MaxScore;
-        public ScoreData(int score) => MaxScore = score;
+        [SerializeField] private int _maxScore;
+
+        public ScoreData(int score) => _maxScore = score;
+
+        public int GetMaxScore() => _maxScore;
     }
 }

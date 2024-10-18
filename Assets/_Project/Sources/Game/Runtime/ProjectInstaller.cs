@@ -3,6 +3,7 @@ using Zenject;
 using Sources.Services;
 using Sources.Services.SaveLoad;
 using Sources.Services.Score;
+using Sources.Services.Master;
 
 namespace Sources.Game.Runtime
 {
@@ -18,6 +19,10 @@ namespace Sources.Game.Runtime
 
             Container.Bind<IScoreService>()
                 .To<ScoreService>()
+                .AsSingle();
+
+            Container.Bind<IMasterService>()
+                .To<MasterService>()
                 .AsSingle();
 
             Container.Bind<CurtainView>()

@@ -1,5 +1,4 @@
 using Zenject;
-using System;
 using Sources.Services.SaveLoad;
 using UnityEngine;
 
@@ -39,7 +38,7 @@ namespace Sources.Services.Score
         {
             ScoreData data = _saveLoadService.LoadScoreData();
 
-            MaxScore = data != null ? data.MaxScore : 0;
+            MaxScore = data != null ? data.GetMaxScore() : 0;
         }
     }
 }

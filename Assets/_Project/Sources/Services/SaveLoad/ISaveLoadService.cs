@@ -1,3 +1,4 @@
+using Sources.Services.Master;
 using Sources.Services.Score;
 
 namespace Sources.Services.SaveLoad
@@ -7,5 +8,9 @@ namespace Sources.Services.SaveLoad
         void Save(ScoreData data);
 
         ScoreData LoadScoreData();
+
+        void Save(MasterData data);
+
+        MasterData LoadMasterData();
     }
 }
