@@ -1,6 +1,3 @@
-## BobbyBasket
+# BobbyBasket
 
-Что было вашей мотивацией?
-Какую проблему это решает?
-Что вы узнали?
-Что отличает ваш проект от других?
+> The player needs to move left and write to avoid getting blown up by bombs falling from above. Additionally, the player must collect coins to set new records.
